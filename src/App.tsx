@@ -7,17 +7,17 @@ import FileExplorer from './components/FileExplorer'
 import Errors from './components/Errors'
 import LiveView from './components/LiveView'
 
+// hook
+import useLocalStorage from './hooks/useLocalStorage'
+
 const App = () => {
   const [selectedFile, setSelectedFile] = React.useState<string>('index.js')
-  const [htmlCode, setHtmlCode] = React.useState<string>(
-    `<!-- write some HTML here -->`
-  )
-  const [cssCode, setCssCode] = React.useState<string>(
-    `/* write some CSS here */`
-  )
-  const [jsCode, setJsCode] = React.useState<string>(`// write some JS here`)
+  const [htmlCode, setHtmlCode] = useLocalStorage('codeditor-html', ``)
+  const [cssCode, setCssCode] = useLocalStorage('codeditor-css', ``)
+  const [jsCode, setJsCode] = useLocalStorage('codeditor-js', ``)
   const [srcCode, setSrcCode] = React.useState<string>('')
   const [errors, setErrors] = React.useState<any[]>([])
+  const [collapsedEditor, setCollapsedEditor] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -29,6 +29,7 @@ const App = () => {
         <body>${htmlCode}</body>
         <style>${cssCode}</style>
         <script>${jsCode}</script>
+      </html>
     `)
     }, 1000)
     return () => clearTimeout(timeout)
@@ -39,22 +40,28 @@ const App = () => {
       <FileExplorer setSelectedFile={setSelectedFile} />
       <div className='right-pane'>
         <div className='code-editor-pane'>
-          <div className='file-name'>
+          <div
+            onClick={() => setCollapsedEditor(!collapsedEditor)}
+            className='file-name'
+          >
             {selectedFile === 'index.html' && 'HTML'}
             {selectedFile === 'index.css' && 'CSS'}
             {selectedFile === 'index.js' && 'JS'}
           </div>
-          <div className='code-editor'>
+          <div className={collapsedEditor ? 'code-editor' : 'code-editor big'}>
             <CodeEditor
               selectedFile={selectedFile}
               setHtmlCode={setHtmlCode}
               setCssCode={setCssCode}
               setJsCode={setJsCode}
               setErrors={setErrors}
+              htmlCode={htmlCode}
+              cssCode={cssCode}
+              jsCode={jsCode}
             />
           </div>
         </div>
-        <div className='live-view'>
+        <div className={collapsedEditor ? 'live-view' : 'live-view small'}>
           {errors.length === 0 ? (
             <LiveView srcCode={srcCode} />
           ) : (

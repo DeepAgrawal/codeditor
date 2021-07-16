@@ -8,6 +8,9 @@ interface CodeEditorInt {
   setCssCode: React.Dispatch<React.SetStateAction<string>>
   setJsCode: React.Dispatch<React.SetStateAction<string>>
   setErrors: React.Dispatch<React.SetStateAction<any[]>>
+  htmlCode: string
+  cssCode: string
+  jsCode: string
 }
 
 const CodeEditor: React.FC<CodeEditorInt> = ({
@@ -15,9 +18,22 @@ const CodeEditor: React.FC<CodeEditorInt> = ({
   setHtmlCode,
   setCssCode,
   setJsCode,
-  setErrors
+  setErrors,
+  htmlCode,
+  cssCode,
+  jsCode
 }) => {
   const file = supportedFileTypes[selectedFile]
+
+  React.useEffect(() => {
+    supportedFileTypes['index.html'].value = htmlCode
+  }, [htmlCode])
+  React.useEffect(() => {
+    supportedFileTypes['index.css'].value = cssCode
+  }, [cssCode])
+  React.useEffect(() => {
+    supportedFileTypes['index.js'].value = jsCode
+  }, [jsCode])
 
   const handleOnChange = (value: string | undefined, event: any) => {
     if (selectedFile === 'index.html' && value !== undefined) {
@@ -30,6 +46,7 @@ const CodeEditor: React.FC<CodeEditorInt> = ({
   }
 
   const handleEditorValidation = (markers: any[]) => {
+    markers = markers.filter((marker) => marker.severity > 4)
     setErrors(markers)
   }
 

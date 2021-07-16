@@ -11,7 +11,9 @@ interface FileExplorerInt {
 const FileExplorer: React.FC<FileExplorerInt> = ({ setSelectedFile }) => {
   return (
     <div className='file-explorer'>
-      <div className='file-explorer-header'>EXPLORER</div>
+      <div className='file-explorer-header'>
+        <span className='file-explorer-header-text'>EXPLORER</span>
+      </div>
       <div className='files'>
         <div onClick={() => setSelectedFile('index.html')} className='file'>
           <img className='file-icon' src={HTML} alt='index.html' />
