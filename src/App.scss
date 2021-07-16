@@ -76,6 +76,26 @@ body {
     }
     .live-view {
       height: 50vh;
+
+      .errors-container {
+        background-color: rgb(53, 53, 53);
+        padding: 30px;
+        height: 50vh;
+        .failed-header {
+          font-size: 2rem;
+          color: rgb(232, 59, 70);
+        }
+        .errors {
+          margin: 20px 0;
+          padding: 10px;
+          background-color: rgb(69, 50, 52);
+          border-radius: 10px;
+          .error {
+            list-style-type: none;
+            color: rgb(252, 207, 207);
+          }
+        }
+      }
     }
   }
 }

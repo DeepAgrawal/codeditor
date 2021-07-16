@@ -3,11 +3,9 @@ import './App.scss'
 
 // components
 import CodeEditor from './components/CodeEditor'
-
-// assets
-import HTML from './assets/html-icon.png'
-import CSS from './assets/css-icon.png'
-import JS from './assets/js-icon.png'
+import FileExplorer from './components/FileExplorer'
+import Errors from './components/Errors'
+import LiveView from './components/LiveView'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = React.useState<string>('index.js')
@@ -19,35 +17,26 @@ const App = () => {
   )
   const [jsCode, setJsCode] = React.useState<string>(`// write some JS here`)
   const [srcCode, setSrcCode] = React.useState<string>('')
+  const [errors, setErrors] = React.useState<any[]>([])
 
   React.useEffect(() => {
-    setSrcCode(`
+    const timeout = setTimeout(() => {
+      if (errors.length !== 0) {
+        return
+      }
+      setSrcCode(`
       <html>
         <body>${htmlCode}</body>
         <style>${cssCode}</style>
         <script>${jsCode}</script>
     `)
-  }, [htmlCode, cssCode, jsCode])
+    }, 1000)
+    return () => clearTimeout(timeout)
+  }, [htmlCode, cssCode, jsCode, errors.length])
 
   return (
     <div className='App'>
-      <div className='file-explorer'>
-        <div className='file-explorer-header'>EXPLORER</div>
-        <div className='files'>
-          <div onClick={() => setSelectedFile('index.html')} className='file'>
-            <img className='file-icon' src={HTML} alt='index.html' />
-            <span className='file-name'>index.html</span>
-          </div>
-          <div onClick={() => setSelectedFile('index.css')} className='file'>
-            <img className='file-icon' src={CSS} alt='index.css' />
-            <span className='file-name'>index.css</span>
-          </div>
-          <div onClick={() => setSelectedFile('index.js')} className='file'>
-            <img className='file-icon' src={JS} alt='index.js' />
-            <span className='file-name'>index.js</span>
-          </div>
-        </div>
-      </div>
+      <FileExplorer setSelectedFile={setSelectedFile} />
       <div className='right-pane'>
         <div className='code-editor-pane'>
           <div className='file-name'>
@@ -61,18 +50,16 @@ const App = () => {
               setHtmlCode={setHtmlCode}
               setCssCode={setCssCode}
               setJsCode={setJsCode}
+              setErrors={setErrors}
             />
           </div>
         </div>
         <div className='live-view'>
-          <iframe
-            srcDoc={srcCode}
-            title='web-view'
-            sandbox='allow-scripts'
-            frameBorder='0'
-            width='100%'
-            height='100%'
-          />
+          {errors.length === 0 ? (
+            <LiveView srcCode={srcCode} />
+          ) : (
+            <Errors errors={errors} />
+          )}
         </div>
       </div>
     </div>
