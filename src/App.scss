@@ -19,6 +19,42 @@ body {
     height: 100vh;
     flex: 1;
     background-color: rgb(37, 37, 38);
+
+    .file-explorer-header {
+      height: 5vh;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      color: rgb(200, 200, 200);
+      font-size: 0.8rem;
+    }
+
+    .files {
+      .file {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        &:hover {
+          background-color: rgb(45, 45, 45);
+        }
+        padding: 20px 20px;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        .file-icon {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+        .file-name {
+          padding: 0 12px;
+          font-size: 1rem;
+          color: rgb(200, 200, 200);
+        }
+      }
+    }
   }
 
   .right-pane {
@@ -27,12 +63,15 @@ body {
       height: 50vh;
 
       .file-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 5vh;
         background-color: rgb(51, 51, 51);
+        color: rgb(200, 200, 200);
       }
       .code-editor {
         height: 45vh;
-        background-color: rgb(30, 30, 30);
       }
     }
     .live-view {
