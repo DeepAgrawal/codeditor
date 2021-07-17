@@ -59,7 +59,7 @@ const App = () => {
         const queryParams = new URLSearchParams(window.location.search)
         const pastebinId = queryParams.get('id')
         const headers = {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         }
         const res = await axios.get('/raw/' + pastebinId, {
