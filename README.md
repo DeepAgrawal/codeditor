@@ -13,6 +13,10 @@ Codeditor is an online code editor for HTML, CSS and JavaScript built on **React
 NPM package managers is required for installation. ([click here](https://nodejs.org/en/) to download node)
 
 ```bash
+# clone the repo
+git clone https://github.com/DeepAgrawal/codeditor.git
+# go to codeditor folder
+cd codeditor
 # install all packages in package.json
 npm install
 ```
@@ -20,7 +24,7 @@ npm install
 ## Usage
 
 ```bash
-# start the server
+# start the react server
 npm start
 ```
 
