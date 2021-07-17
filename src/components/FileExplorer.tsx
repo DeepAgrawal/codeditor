@@ -53,10 +53,8 @@ const FileExplorer: React.FC<FileExplorerInt> = ({
       setShareLink('https://deepagrawal.github.io/codeditor?id=' + lastsegment)
       setShareOpen(true)
     } catch (error) {
-      if (error.message === 'Request failed with status code 422') {
-        setShareOpen(true)
-        setPostLimitExceeded(true)
-      }
+      setShareOpen(true)
+      setPostLimitExceeded(true)
     }
   }
 
