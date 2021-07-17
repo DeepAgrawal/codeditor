@@ -48,13 +48,16 @@ body {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        &:hover {
-          background-color: rgb(45, 45, 45);
-        }
         padding: 20px 20px;
         height: 2rem;
         display: flex;
         align-items: center;
+        &:hover {
+          background-color: rgb(45, 45, 45);
+        }
+        &.active {
+          background-color: rgb(51, 51, 51);
+        }
         @media screen and (max-width: $tabletPort) {
           display: flex;
           justify-content: center;
@@ -85,18 +88,50 @@ body {
     flex: 4;
 
     .code-editor-pane {
-      .file-name {
+      .code-editor-header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         height: 5vh;
         background-color: rgb(51, 51, 51);
         color: rgb(200, 200, 200);
         cursor: pointer;
+
+        .file-name {
+          height: 5vh;
+          display: flex;
+          align-items: center;
+          padding: 0 20px;
+          background-color: rgb(30, 30, 30);
+          span {
+            display: flex;
+            align-items: center;
+            .file-name-icon {
+              height: 1rem;
+              width: 1rem;
+              margin-right: 0.5rem;
+            }
+          }
+        }
+
+        .code-editor-toggle {
+          height: 5vh;
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+          img {
+            transform: rotate(-90deg);
+            height: 1rem;
+            width: 1rem;
+            transition: 0.5s;
+            &.collapsed {
+              transform: rotate(90deg);
+            }
+          }
+        }
       }
 
       .code-editor {
-        // height: 45vh;
         height: 0;
         transition: 0.5s;
         overflow: hidden;

@@ -10,6 +10,12 @@ import LiveView from './components/LiveView'
 // hook
 import useLocalStorage from './hooks/useLocalStorage'
 
+//assets
+import HTML from './assets/html-icon.png'
+import CSS from './assets/css-icon.png'
+import JS from './assets/js-icon.png'
+import Toggle from './assets/collapse.svg'
+
 const App = () => {
   const [selectedFile, setSelectedFile] = React.useState<string>('index.html')
   const [htmlCode, setHtmlCode] = useLocalStorage('codeditor-html', '')
@@ -37,16 +43,47 @@ const App = () => {
 
   return (
     <div className='App'>
-      <FileExplorer setSelectedFile={setSelectedFile} />
+      <FileExplorer
+        selectedFile={selectedFile}
+        setSelectedFile={setSelectedFile}
+      />
       <div className='right-pane'>
         <div className='code-editor-pane'>
           <div
             onClick={() => setCollapsedEditor(!collapsedEditor)}
-            className='file-name'
+            className='code-editor-header'
           >
-            {selectedFile === 'index.html' && 'HTML'}
-            {selectedFile === 'index.css' && 'CSS'}
-            {selectedFile === 'index.js' && 'JS'}
+            {selectedFile === 'index.html' && (
+              <div className='file-name'>
+                <span>
+                  <img className='file-name-icon' src={HTML} alt='HTML' />
+                </span>
+                <span>HTML</span>
+              </div>
+            )}
+            {selectedFile === 'index.css' && (
+              <div className='file-name'>
+                <span>
+                  <img className='file-name-icon' src={CSS} alt='CSS' />
+                </span>
+                <span>CSS</span>
+              </div>
+            )}
+            {selectedFile === 'index.js' && (
+              <div className='file-name'>
+                <span>
+                  <img className='file-name-icon' src={JS} alt='JS' />
+                </span>
+                <span>JS</span>
+              </div>
+            )}
+            <div className='code-editor-toggle'>
+              <img
+                className={collapsedEditor ? 'collapsed' : ''}
+                src={Toggle}
+                alt='Code Editor Toggle'
+              />
+            </div>
           </div>
           <div className={collapsedEditor ? 'code-editor' : 'code-editor big'}>
             <CodeEditor
