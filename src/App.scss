@@ -132,6 +132,9 @@ body {
     &.close {
       display: none;
     }
+    @media screen and (max-width: $tabletPort) {
+      width: 300px;
+    }
 
     .share-header {
       display: flex;
@@ -143,6 +146,9 @@ body {
         font-size: 2rem;
         font-weight: bold;
         color: rgb(0, 122, 204);
+        @media screen and (max-width: $tabletPort) {
+          font-size: 1.5rem;
+        }
       }
       .close-btn {
         display: flex;
@@ -158,6 +164,9 @@ body {
         img {
           padding: 0 1rem;
           height: 1rem;
+          @media screen and (max-width: $tabletPort) {
+            height: 0.8rem;
+          }
         }
       }
     }
@@ -165,6 +174,9 @@ body {
       margin-top: 1rem;
       .copy-link-text {
         font-size: 1.5rem;
+        @media screen and (max-width: $tabletPort) {
+          font-size: 1rem;
+        }
       }
       .copy-link-box {
         background-color: rgb(30, 30, 30);

@@ -58,13 +58,17 @@ const App = () => {
       try {
         const queryParams = new URLSearchParams(window.location.search)
         const pastebinId = queryParams.get('id')
+        const headers = {
+          'Content-Type': 'multipart/form-data',
+          'Access-Control-Allow-Origin': '*'
+        }
         const res = await axios.get('/raw/' + pastebinId, {
-          headers: { 'Content-Type': 'multipart/form-data' }
+          headers
         })
+        console.log(res.data)
         setHtmlCode(res.data.html)
         setCssCode(res.data.css)
         setJsCode(res.data.js)
-        console.log(res)
       } catch (error) {
         console.log(error)
       }
