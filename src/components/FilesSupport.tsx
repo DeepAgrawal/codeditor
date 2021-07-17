@@ -1,8 +1,14 @@
-const JSCode = `// write some JS here`
+const JSCode = `// Code some JS`
 
-const CSSCode = `/* write some CSS here */`
+const CSSCode = `h1 {
+  color: rgb(0, 122, 204);
+  text-align: center;
+}`
 
-const HTMLCode = `<!-- write some HTML here -->`
+const HTMLCode = `<!-- Start writing HTML (no need of html and body tags) -->
+<h1>
+    Welome !!!
+</h1>`
 
 interface supportedFileTypesInt {
   [key: string]: {

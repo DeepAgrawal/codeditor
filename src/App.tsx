@@ -15,6 +15,7 @@ import HTML from './assets/html-icon.png'
 import CSS from './assets/css-icon.png'
 import JS from './assets/js-icon.png'
 import Toggle from './assets/collapse.svg'
+import axios from 'axios'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = React.useState<string>('index.html')
@@ -24,6 +25,7 @@ const App = () => {
   const [srcCode, setSrcCode] = React.useState<string>('')
   const [errors, setErrors] = React.useState<any[]>([])
   const [collapsedEditor, setCollapsedEditor] = React.useState<boolean>(false)
+  const [shareLink, setShareLink] = React.useState<string | null>(null)
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -41,11 +43,34 @@ const App = () => {
     return () => clearTimeout(timeout)
   }, [htmlCode, cssCode, jsCode, errors.length])
 
+  React.useEffect(() => {
+    const fetchCodes = async () => {
+      try {
+        const queryParams = new URLSearchParams(window.location.search)
+        const pastebinId = queryParams.get('id')
+        const res = await axios.get('/raw/' + pastebinId, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+        setHtmlCode(res.data.html)
+        setCssCode(res.data.css)
+        setJsCode(res.data.js)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchCodes()
+  }, [setCssCode, setHtmlCode, setJsCode])
+
   return (
     <div className='App'>
       <FileExplorer
         selectedFile={selectedFile}
         setSelectedFile={setSelectedFile}
+        htmlCode={htmlCode}
+        cssCode={cssCode}
+        jsCode={jsCode}
+        shareLink={shareLink}
+        setShareLink={setShareLink}
       />
       <div className='right-pane'>
         <div className='code-editor-pane'>
