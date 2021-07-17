@@ -27,6 +27,7 @@ const FileExplorer: React.FC<FileExplorerInt> = ({
   setShareLink
 }) => {
   const [shareOpen, setShareOpen] = React.useState(false)
+  const [postLimitExceeded, setPostLimitExceeded] = React.useState(false)
   const handleShare = async () => {
     try {
       const payload = {
@@ -45,12 +46,17 @@ const FileExplorer: React.FC<FileExplorerInt> = ({
         headers: { 'Content-Type': 'multipart/form-data' }
       })
 
+      // const res = { data: 'https://pastebin.com/BBqnYGTN' }
+
       const array = res.data.split('/')
       const lastsegment = array[array.length - 1]
       setShareLink('https://deepagrawal.github.io/codeditor?id=' + lastsegment)
       setShareOpen(true)
     } catch (error) {
-      console.log(error)
+      if (error.message === 'Request failed with status code 422') {
+        setShareOpen(true)
+        setPostLimitExceeded(true)
+      }
     }
   }
 
@@ -93,23 +99,35 @@ const FileExplorer: React.FC<FileExplorerInt> = ({
       <div className={shareOpen ? 'share' : 'share close'}>
         <div className='share-header'>
           <span className='share-header-text'>Share link</span>
-          <span onClick={() => setShareOpen(false)} className='close-btn'>
+          <span
+            onClick={() => {
+              setShareOpen(false)
+              setPostLimitExceeded(false)
+            }}
+            className='close-btn'
+          >
             <img src={CLOSE} alt='Close share' />
           </span>
         </div>
-        <div className='copy-link-container'>
-          <div className='copy-link-text'>Copy link</div>
-          <div className='copy-link-box'>
-            <span>{shareLink}</span>
-            <img
-              onClick={() => {
-                navigator.clipboard.writeText(shareLink ? shareLink : '')
-              }}
-              src={COPY}
-              alt='COPY LINK'
-            />
+        {postLimitExceeded ? (
+          <div style={{ marginTop: '1rem' }} className='copy-link-text'>
+            Post limit exceeded for PASTEBIN API
           </div>
-        </div>
+        ) : (
+          <div className='copy-link-container'>
+            <div className='copy-link-text'>Copy link</div>
+            <div className='copy-link-box'>
+              <span>{shareLink}</span>
+              <img
+                onClick={() => {
+                  navigator.clipboard.writeText(shareLink ? shareLink : '')
+                }}
+                src={COPY}
+                alt='COPY LINK'
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   )

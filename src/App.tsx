@@ -17,11 +17,21 @@ import JS from './assets/js-icon.png'
 import Toggle from './assets/collapse.svg'
 import axios from 'axios'
 
+const JSCode = `// Code some JS`
+const CSSCode = `h1 {
+  color: rgb(0, 122, 204);
+  text-align: center;
+}`
+const HTMLCode = `<!-- Start writing HTML (no need of html and body tags) -->
+<h1>
+    Welome !!!
+</h1>`
+
 const App = () => {
   const [selectedFile, setSelectedFile] = React.useState<string>('index.html')
-  const [htmlCode, setHtmlCode] = useLocalStorage('codeditor-html', '')
-  const [cssCode, setCssCode] = useLocalStorage('codeditor-css', '')
-  const [jsCode, setJsCode] = useLocalStorage('codeditor-js', '')
+  const [htmlCode, setHtmlCode] = useLocalStorage('codeditor-html', HTMLCode)
+  const [cssCode, setCssCode] = useLocalStorage('codeditor-css', CSSCode)
+  const [jsCode, setJsCode] = useLocalStorage('codeditor-js', JSCode)
   const [srcCode, setSrcCode] = React.useState<string>('')
   const [errors, setErrors] = React.useState<any[]>([])
   const [collapsedEditor, setCollapsedEditor] = React.useState<boolean>(false)
@@ -54,6 +64,7 @@ const App = () => {
         setHtmlCode(res.data.html)
         setCssCode(res.data.css)
         setJsCode(res.data.js)
+        console.log(res)
       } catch (error) {
         console.log(error)
       }
