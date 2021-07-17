@@ -2,6 +2,8 @@
 
 Codeditor is an online code editor for HTML, CSS and JavaScript built on **React (TypeScript)**. Its perfect for quick code runs and testing without opening full featured IDE on PC.
 
+**Live on** - [https://deepagrawal.github.io/codeditor/](https://deepagrawal.github.io/codeditor/)
+
 ```diff
 - !IMPORTANT! -
 - Get request for "pastebin developer api" gives CORS error, test this functionality on local machine.
