@@ -25,6 +25,10 @@ const CodeEditor: React.FC<CodeEditorInt> = ({
 }) => {
   const file = supportedFileTypes[selectedFile]
 
+  if (selectedFile === 'index.html') {
+    file.value = htmlCode
+  }
+
   React.useEffect(() => {
     supportedFileTypes['index.html'].value = htmlCode
   }, [htmlCode])

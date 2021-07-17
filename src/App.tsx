@@ -11,10 +11,10 @@ import LiveView from './components/LiveView'
 import useLocalStorage from './hooks/useLocalStorage'
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = React.useState<string>('index.js')
-  const [htmlCode, setHtmlCode] = useLocalStorage('codeditor-html', ``)
-  const [cssCode, setCssCode] = useLocalStorage('codeditor-css', ``)
-  const [jsCode, setJsCode] = useLocalStorage('codeditor-js', ``)
+  const [selectedFile, setSelectedFile] = React.useState<string>('index.html')
+  const [htmlCode, setHtmlCode] = useLocalStorage('codeditor-html', '')
+  const [cssCode, setCssCode] = useLocalStorage('codeditor-css', '')
+  const [jsCode, setJsCode] = useLocalStorage('codeditor-js', '')
   const [srcCode, setSrcCode] = React.useState<string>('')
   const [errors, setErrors] = React.useState<any[]>([])
   const [collapsedEditor, setCollapsedEditor] = React.useState<boolean>(false)
