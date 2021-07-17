@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/codeditor/static/css/main.1c4acfff.chunk.css",
-    "main.js": "/codeditor/static/js/main.b78b1a7a.chunk.js",
-    "main.js.map": "/codeditor/static/js/main.b78b1a7a.chunk.js.map",
+    "main.css": "/codeditor/static/css/main.732d7e19.chunk.css",
+    "main.js": "/codeditor/static/js/main.68c9c03c.chunk.js",
+    "main.js.map": "/codeditor/static/js/main.68c9c03c.chunk.js.map",
     "runtime-main.js": "/codeditor/static/js/runtime-main.6eacbb54.js",
     "runtime-main.js.map": "/codeditor/static/js/runtime-main.6eacbb54.js.map",
     "static/js/2.f72ba256.chunk.js": "/codeditor/static/js/2.f72ba256.chunk.js",
     "static/js/2.f72ba256.chunk.js.map": "/codeditor/static/js/2.f72ba256.chunk.js.map",
     "index.html": "/codeditor/index.html",
-    "static/css/main.1c4acfff.chunk.css.map": "/codeditor/static/css/main.1c4acfff.chunk.css.map",
+    "static/css/main.732d7e19.chunk.css.map": "/codeditor/static/css/main.732d7e19.chunk.css.map",
     "static/js/2.f72ba256.chunk.js.LICENSE.txt": "/codeditor/static/js/2.f72ba256.chunk.js.LICENSE.txt",
     "static/media/close.6ea6e49e.svg": "/codeditor/static/media/close.6ea6e49e.svg",
     "static/media/collapse.1f2f7d60.svg": "/codeditor/static/media/collapse.1f2f7d60.svg",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.6eacbb54.js",
     "static/js/2.f72ba256.chunk.js",
-    "static/css/main.1c4acfff.chunk.css",
-    "static/js/main.b78b1a7a.chunk.js"
+    "static/css/main.732d7e19.chunk.css",
+    "static/js/main.68c9c03c.chunk.js"
   ]
 }
